@@ -1,24 +1,14 @@
 class Solution {
     public int[] leftRightDifference(int[] nums) {
         int n = nums.length;
-        int[] leftSum = new int[n];
-        int[] rightSum = new int[n];
-        int[] res = new int[n];
-        int sum = 0;
+        int leftSum=0, rightSum=0;
+        for(int num: nums) rightSum+=num;
         for(int i=0; i<n; i++){
-            leftSum[i] = sum;
-            sum+=nums[i];
+            int val = nums[i];
+            rightSum -= val;
+            nums[i] = Math.abs(leftSum - rightSum);
+            leftSum += val;
         }
-        sum = 0;
-        for(int i=n-1; i>=0; i--){
-            rightSum[i] = sum;
-            sum+=nums[i];
-        }
-
-        for(int i=0; i<n; i++){
-            res[i] = Math.abs(leftSum[i] - rightSum[i]);
-        }
-        return res;
-
+        return nums;
     }
 }
