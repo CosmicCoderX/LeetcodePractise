@@ -9,28 +9,21 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root == null) return null;
-        if(root == p || root == q) return root;
+        if(root == null) return null; //reached end, found nothing
+        if(root == p || root == q) return root; //found p or q, send it up
 
-        boolean pInLeft = contains(root.left, p);
-        boolean qInLeft = contains(root.left, q);
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
 
-        // Both are in left subtree
-        if(pInLeft && qInLeft) {
-            return lowestCommonAncestor(root.left, p, q);
+        if(left != null && right != null){
+            return root;      // p and q split here
         }
-
-        // Both are in right subtree
-        if(!pInLeft && !qInLeft) {
-            return lowestCommonAncestor(root.right, p, q);
+        if(left != null){
+            return left;      // pass answer upward
         }
-
-        // One in left, one in right
-        return root;
-    }
-    public boolean contains(TreeNode root, TreeNode node){
-        if(root == null) return false;
-        if(root == node) return true;
-        return contains(root.left, node) || contains(root.right, node);
+        if(right != null){
+            return right;     // pass answer upward
+        }
+        return null;
     }
 }
