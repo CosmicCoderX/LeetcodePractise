@@ -19,7 +19,7 @@ class Solution {
         int n = arr.size();
         int i = 0;
         int j = n-1;
-        int max = Integer.MIN_VALUE;
+        int max = 0;
         while(i<j){
             max = Math.max(max, arr.get(i) + arr.get(j));
             i++;
