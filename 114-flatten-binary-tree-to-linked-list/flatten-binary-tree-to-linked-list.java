@@ -1,21 +1,25 @@
 class Solution {
     public void flatten(TreeNode root) {
-        if(root == null) return;
+        // Using Morris Traversal (O(1) Space)
+        TreeNode curr = root;
+        while(curr != null){
+            if(curr.left != null){
+                TreeNode pred = curr.left;
 
-        TreeNode leftTree = root.left;
-        TreeNode rightTree = root.right;
+                // Left subtree ka rightmost node dhoondo
+                while(pred.right != null){
+                    pred = pred.right;
+                }
 
-        flatten(leftTree);
-        flatten(rightTree);
-        root.right = leftTree;
-        root.left = null;
+                // Right subtree ko rightmost ke baad attach karo
+                pred.right = curr.right;
 
-        TreeNode temp = leftTree;
-        while(temp!=null && temp.right!=null){
-            temp = temp.right;
+                // Left subtree ko right me shift karo
+                curr.right = curr.left;
+                curr.left = null; // Left hamesha null karna hai
+            }
+            // Agle node par move karo
+            curr = curr.right;
         }
-        if(temp!=null) temp.right = rightTree;
-        else root.right = rightTree;
-        return;
     }
 }
