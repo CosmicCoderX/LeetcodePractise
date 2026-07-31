@@ -7,15 +7,12 @@ class Solution {
         }
         Arrays.sort(freq);
 
-        int totalPush = 0;
-        for(int i=0; i<26; i++){
-            int currfreq = freq[25-i];
-            if(currfreq == 0) break;
-            int pushCost = (i/8) + 1;
-            totalPush += pushCost * currfreq;
-
+        int push = 0;
+        for(int i=25; i>=0; i--){
+            if(freq[i] == 0) break;
+            push += (((25-i)/8)+1) * freq[i];
         }
 
-        return totalPush;
+        return push;
     }
 }
