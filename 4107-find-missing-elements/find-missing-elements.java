@@ -2,12 +2,13 @@ class Solution {
     public List<Integer> findMissingElements(int[] nums) {
         List<Integer> res = new ArrayList<>();
         int n = nums.length;
-        Arrays.sort(nums);
-        int min = nums[0];
-        int max = nums[n-1];
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
 
         HashSet<Integer> set = new HashSet<>();
         for(int num: nums){
+            max = Math.max(max, num);
+            min = Math.min(min, num);
             set.add(num);
         }
 
