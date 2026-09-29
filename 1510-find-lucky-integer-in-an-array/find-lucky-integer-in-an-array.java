@@ -5,7 +5,7 @@ class Solution {
             map.put(num, map.getOrDefault(num, 0)+1);
         }
         int max = -1;
-        for(int num: arr){
+        for(int num: map.keySet()){
             if(map.get(num) == num){
                 max = Math.max(max, num);
             }
